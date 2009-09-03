@@ -1,0 +1,38 @@
+h1. Sinatra Skeleton
+
+I thought I'd share  the base layout I use for the majority of my Sinatra applications. This base includes DataMapper, RSpec and haml. Please feel free to fork and improve upon if you wish. I borrowed some of the tasks/layout choices from Merb, so thanks :).
+
+There is one other branch besides the master, this contains the same layout but includes authentication via "Warden":http://github.com/hassox/warden/tree/master.
+
+h2. Getting Started
+
+Install the needed gems:
+
+<pre>
+  sudo gem install sinatra  haml rspec rack-test dm-core dm-more
+</pre>
+
+Write some specs, add some controller actions and compliment them with some DataMapper models then run this:
+
+<pre>
+  rake db:automigrate
+  ruby applicaiton.rb
+</pre>
+
+h2. Configuration/Layout
+
+Dependencies and configuration is done in the _environment.rb_ file. DataMapper is setup to use sqlite3 by default. However you can set the environment variable _DATABASE_URL_ to provide a production database. Tests will use the in-memory sqlite3 database so you don't need to set that up.
+
+Put all your controller actions in the _applications.rb_ file, any helpers may go in here too and also any custom 404/error messages. For each actions the view is placed in the _views_ directory.
+
+All the static content belongs in the public directory in their appropriate sub-directories.
+
+All the DataMapper models can be added to the _models.rb_ file.
+
+Finally, you can add your specs into the _spec_ directory. Be sure to include _spec_helper.rb_. There is an example spec in the directory.
+
+You can run specs using the rake task:
+
+<pre>
+  rake spec
+</pre>
