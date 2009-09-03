@@ -7,19 +7,7 @@ require 'haml'
 
 require 'sinatra' unless defined?(Sinatra)
 
-configure :development do
-  DataMapper.setup(:default, {
-    :adapter  => "sqlite3",
-    :database => "development.db"
-  })
-end
-
-configure :production do
-  DataMapper.setup(:default, {
-    :adapter  => "sqlite3",
-    :database => "production.db"
-  })
-end
+DataMapper.setup(:default, ENV['DATABASE_URL'] || 'sqlite3://development.db')
 
 # Load Models
 require 'models'
